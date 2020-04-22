@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\janse\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\janse\\.nuget\\packages"
+    ]
+  }
+}
