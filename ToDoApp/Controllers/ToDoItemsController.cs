@@ -141,11 +141,12 @@ namespace ToDoApp.Controllers
         // POST: ToDoItems/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(int id, ToDoItem toDoItem)
         {
             try
             {
-                // TODO: Add delete logic here
+                _context.ToDoItem.Remove(toDoItem);
+                await _context.SaveChangesAsync();
 
                 return RedirectToAction(nameof(Index));
             }
