@@ -29,7 +29,10 @@ namespace ToDoApp.Controllers
         public async Task<ActionResult> Index()
         {
             var user = await GetCurrentUserAsync();
-            var items = await _context.ToDoItem.Where(item => item.ApplicationUserId == user.Id).ToListAsync();
+            var items = await _context.ToDoItem
+                .Where(item => item.ApplicationUserId == user.Id)
+                .Include(item => item.ToDoStatus)
+                .ToListAsync();
             return View(items);
         }
 
@@ -133,9 +136,11 @@ namespace ToDoApp.Controllers
         }
 
         // GET: ToDoItems/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return View();
+            var toDoItem = await _context.ToDoItem.FirstOrDefaultAsync(item => item.Id == id);
+
+            return View(toDoItem);
         }
 
         // POST: ToDoItems/Delete/5
