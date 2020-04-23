@@ -4,22 +4,26 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>All Tasks</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-left"><a asp-action="Create" class="btn btn-secondary text-dark btn-sm mb-3">Create New</a></div>
+            <div class="col-md-6 text-right"><a asp-action="IndexOfIncompleteTasks" class="btn btn-primary btn-sm mb-3">View Incomplete Tasks</a></div>
+            <div class="col-md-6 text-right"><a asp-action="IndexOfInProgressTasks" class="btn btn-primary btn-sm mb-3">View Tasks In Progress</a></div>
+            <div class="col-md-6 text-right"><a asp-action="IndexOfCompleteTasks" class="btn btn-primary btn-sm mb-3">View Completed Tasks</a></div>
+        </div>
+    </div>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                Task
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TodoStatusId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ToDoStatus)
+                Status
             </th>
             <th></th>
         </tr>
@@ -31,14 +35,10 @@
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TodoStatusId)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.ToDoStatus.Title)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
         </tr>

@@ -36,6 +36,36 @@ namespace ToDoApp.Controllers
             return View(items);
         }
 
+        public async Task<ActionResult> IndexOfIncompleteTasks()
+        {
+            var user = await GetCurrentUserAsync();
+            var items = await _context.ToDoItem
+                .Where(item => item.ApplicationUserId == user.Id && item.TodoStatusId == 1)
+                .Include(item => item.ToDoStatus)
+                .ToListAsync();
+            return View(items);
+        }
+
+        public async Task<ActionResult> IndexOfInProgressTasks()
+        {
+            var user = await GetCurrentUserAsync();
+            var items = await _context.ToDoItem
+                .Where(item => item.ApplicationUserId == user.Id && item.TodoStatusId == 2)
+                .Include(item => item.ToDoStatus)
+                .ToListAsync();
+            return View(items);
+        }
+
+        public async Task<ActionResult> IndexOfCompleteTasks()
+        {
+            var user = await GetCurrentUserAsync();
+            var items = await _context.ToDoItem
+                .Where(item => item.ApplicationUserId == user.Id && item.TodoStatusId == 3)
+                .Include(item => item.ToDoStatus)
+                .ToListAsync();
+            return View(items);
+        }
+
         // GET: ToDoItems/Details/5
         public ActionResult Details(int id)
         {
@@ -68,9 +98,10 @@ namespace ToDoApp.Controllers
                 var toDoItem = new ToDoItem
                 {
                     Title = toDoItemCreateViewModel.Title,
-                    ApplicationUserId = user.Id,
                     TodoStatusId = toDoItemCreateViewModel.TodoStatusId,
                 };
+
+                toDoItem.ApplicationUserId = user.Id;
 
                 _context.ToDoItem.Add(toDoItem);
                 await _context.SaveChangesAsync();

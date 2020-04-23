@@ -163,3 +163,6 @@ C:\Users\janse\workspace\ToDoApp\ToDoApp\obj\Debug\netcoreapp3.1\Razor\Views\ToD
 C:\Users\janse\workspace\ToDoApp\ToDoApp\obj\Debug\netcoreapp3.1\Razor\Views\ToDoItems\Index.cshtml.g.cs
 C:\Users\janse\workspace\ToDoApp\ToDoApp\obj\Debug\netcoreapp3.1\Razor\Views\ToDoItems\Edit.cshtml.g.cs
 C:\Users\janse\workspace\ToDoApp\ToDoApp\obj\Debug\netcoreapp3.1\Razor\Views\ToDoItems\Delete.cshtml.g.cs
+C:\Users\janse\workspace\ToDoApp\ToDoApp\obj\Debug\netcoreapp3.1\Razor\Views\ToDoItems\IndexOfIncompleteTasks.cshtml.g.cs
+C:\Users\janse\workspace\ToDoApp\ToDoApp\obj\Debug\netcoreapp3.1\Razor\Views\ToDoItems\IndexOfInProgressTasks.cshtml.g.cs
+C:\Users\janse\workspace\ToDoApp\ToDoApp\obj\Debug\netcoreapp3.1\Razor\Views\ToDoItems\IndexOfCompleteTasks.cshtml.g.cs
