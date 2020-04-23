@@ -83,6 +83,8 @@ namespace ToDoApp.Controllers
 
             viewModel.ToDoStatusOptions = allToDoStatuses;
 
+            
+
             return View(viewModel);
         }
 
@@ -133,7 +135,10 @@ namespace ToDoApp.Controllers
                 ToDoStatusOptions = allToDoStatuses
             };
 
-            viewModel.ToDoStatusOptions = allToDoStatuses;
+            if (toDoItem.ApplicationUserId != user.Id)
+            {
+                return NotFound();
+            }
 
             return View(viewModel);
         }
@@ -145,15 +150,16 @@ namespace ToDoApp.Controllers
         {
             try
             {
-                var user = await GetCurrentUserAsync();
 
                 var toDoItem = new ToDoItem()
                 {
                     Id = id,
                     Title = toDoItemCreateViewModel.Title,
-                    ApplicationUserId = user.Id,
                     TodoStatusId = toDoItemCreateViewModel.TodoStatusId,
                 };
+
+                var user = await GetCurrentUserAsync();
+                toDoItem.ApplicationUserId = user.Id;
 
                 _context.ToDoItem.Update(toDoItem);
                 await _context.SaveChangesAsync();
@@ -171,6 +177,13 @@ namespace ToDoApp.Controllers
         {
             var toDoItem = await _context.ToDoItem.FirstOrDefaultAsync(item => item.Id == id);
 
+            var loggedInUser = await GetCurrentUserAsync();
+
+            if (toDoItem.ApplicationUserId != loggedInUser.Id)
+            {
+                return NotFound();
+            }
+
             return View(toDoItem);
         }
 
@@ -181,6 +194,7 @@ namespace ToDoApp.Controllers
         {
             try
             {
+
                 _context.ToDoItem.Remove(toDoItem);
                 await _context.SaveChangesAsync();
 
